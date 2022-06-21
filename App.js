@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button } from 'react-native';
 
-export default function App() {
-  return (
+const Cat = (props) => {
+  const {isHungry, setIsHungry} = useState(true);
+
+  return(
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text>
+        I am {props.name}, and I am {isHungry ? 'hungry' : 'full'}!
+      </Text>
+      <Button
+        onPress={()=>{
+          setIsHungry(true);
+        }}
+        disabled={!isHungry}
+        title={isHungry ? 'Pour me some milk, please!' : 'Thank You'}
+      />
     </View>
   );
 }
 
+export default function App(){
+  return(
+    <>
+      <Cat name="Pituco" />
+      <Cat name="Potchoco" />
+    </>
+  )
+}
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  container:{
+    marginTop: 25
   },
 });
